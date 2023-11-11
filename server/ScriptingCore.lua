@@ -24,10 +24,16 @@ local ASCII = [[
 SC = {}
 SC.Functions = {}
 
+--- Get the name of the used framework
+--- @return string frameworkname
+--- @author Java3east
 function SC.Functions:GetFramework()
     return Config.framework or "CUSTOM"
 end
 
+--- get the resource name  of the used framework
+--- @return string|nil
+--- @author Java3east
 function SC.Functions:GetResourceName()
     if Config.resource then
         return Config.resource
@@ -40,6 +46,11 @@ function SC.Functions:GetResourceName()
     end
 end
 
+--- Run a function on the 'CUSTOM' and the used framework
+--- @param fkt function
+--- @param ... any
+--- @return any result
+--- @author Java3east
 function SC.Functions:Run(fkt, ...)
     local result = table.pack(SC.CUSTOM[fkt](SC.CUSTOM, ...))
     if SC.CUSTOM.USED then
@@ -49,6 +60,9 @@ function SC.Functions:Run(fkt, ...)
     return SC[self:GetFramework()][fkt](SC[self:GetFramework()], ...)
 end
 
+--- Debug a message
+--- @param ... any
+--- @author Java3east
 function SC.Functions:Debug(...)
     if Config.debug then
         local invoker = GetInvokingResource()
@@ -56,6 +70,10 @@ function SC.Functions:Debug(...)
     end
 end
 
+--- Wait for an event to be triggered
+--- @param name string
+--- @return any result
+--- @author Java3east
 function SC.Functions:AwaitEvent(name)
     local promise = Promise:new()
     RegisterNetEvent(name)
@@ -65,38 +83,60 @@ function SC.Functions:AwaitEvent(name)
     return promise:await(-1)
 end
 
+--- Register a new server callback
+--- @param name string
+--- @param cb function
+--- @author Java3east
 function SC.Functions:RegisterServerCallback(name, cb)
     self:Run("RegisterServerCallback", name, cb)
 end
 
+--- Get the core object of the used framework
+--- @return table|nil
+--- @author Java3east
 function SC.Functions:GetCoreObject()
     return self:Run("GetCoreObject")
 end
 
+--- Get a players job
+--- @param source integer
+--- @return table job
+--- @author Java3east
 function SC.Functions:GetJob(source)
     return self:Run("GetJob", source)
 end
 
+--- Trigger a event on all online players
+--- @param event string
+--- @param ... any
+--- @author Java3east
 function SC.Functions:ToAllOnlinePlayers(event, ...)
     for _, source in pairs(self:GetPlayers()) do
         TriggerClientEvent(event, source, ...)
     end
 end
 
+--- Get a list of online players
+--- @return table array
+--- @author Java3east
 function SC.Functions:GetPlayers()
     return self:Run("GetPlayers")
 end
 
+--- Get the players default colors
+--- @return table
+--- @author Java3east
 function SC.Functions:GetDefaultColors()
     return Config.server.colors
 end
 
+--- Add money to a players account
+--- @param source integer
+--- @param account string
+--- @param amount interger
+--- @author Java3east
 function SC.Functions:AddAccountMoney(source, account, amount)
     self:Run("AddAccountMoney", source, account, amount)
-end
-
-function SC.Functions:SetWeather(weatherType)
-
 end
 
 exports("GetCore", function(advanced)

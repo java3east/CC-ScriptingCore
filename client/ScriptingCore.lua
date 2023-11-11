@@ -5,17 +5,23 @@
 -- #                       Made by Java3east                        # --
 -- #                                                                # --
 -- ################################################################## --
-
+--- @type boolean true if this script is done loading
 local loaded = false
 
 
 SC = {}
 SC.Functions = {}
 
+--- Get the name of the used framework
+--- @return string frameworkname
+--- @author Java3east
 function SC.Functions:GetFramework()
     return Config.framework or "CUSTOM"
 end
 
+--- Get the resource name of the used framework
+--- @return string resourcename
+--- @author Java3east
 function SC.Functions:GetResourceName()
     if Config.resource then
         return Config.resource
@@ -28,6 +34,11 @@ function SC.Functions:GetResourceName()
     end
 end
 
+--- Run a framework related function on the currently used framework
+--- @param fkt string function name
+--- @param ... any function parameters
+--- @return any result the result of the function call
+--- @author Java3east
 function SC.Functions:Run(fkt, ...)
     local result = table.pack(SC.CUSTOM[fkt](SC.CUSTOM, ...))
     if SC.CUSTOM.USED then
@@ -37,6 +48,9 @@ function SC.Functions:Run(fkt, ...)
     return SC[self:GetFramework()][fkt](SC[self:GetFramework()], ...)
 end
 
+--- print a debug message, if debugging is enabled
+--- @param ... any
+--- @author Java3east
 function SC.Functions:Debug(...)
     if Config.debug then
         local invoker = GetInvokingResource()
@@ -44,6 +58,11 @@ function SC.Functions:Debug(...)
     end
 end
 
+--- Trigger a server callback
+--- @param name string
+--- @param ... any
+--- @return action action
+--- @author Java3east
 function SC.Functions:ServerCallback(name, ...)
     local args = table.pack(... or {})
     return Action:new(function(cb)
@@ -51,6 +70,10 @@ function SC.Functions:ServerCallback(name, ...)
     end)
 end
 
+--- Wait for an event to be called
+--- @param name string
+--- @return any result of the event
+--- @author Java3east
 function SC.Functions:AwaitEvent(name)
     local promise = Promise:new()
     RegisterNetEvent(name)
@@ -60,18 +83,48 @@ function SC.Functions:AwaitEvent(name)
     return promise:await(-1)
 end
 
+--- Get the core object of the used framework
+--- @return table coreobject the core object
+--- @author Java3east
 function SC.Functions:GetCoreObject()
     return self:Run("GetCoreObject")
 end
 
+--- Get the servers default colors
+--- @return table colors
+--- @author Java3east
 function SC.Functions:GetDefaultColors()
     return Config.server.colors
 end
 
+--- Get the servers default marker
+--- @return table defaultMarker
+--- @author Java3east
 function SC.Functions:GetDefaultMarker()
     return Config.server.marker
 end
 
+--- Draw a marker
+--- @deprecated
+--- @param viewDistance number
+--- @param type integer
+--- @param x number
+--- @param y number
+--- @param z number
+--- @param rotX number
+--- @param rotY number
+--- @param rotZ number
+--- @param diameter number
+--- @param scaleZ number
+--- @param r integer
+--- @param g integer
+--- @param b integer
+--- @param a integer
+--- @param blobUpAndDown boolean
+--- @param rotate boolean
+--- @return boolean draw
+--- @return boolean interact
+--- @author Java3east
 function SC.Functions:DrawMarker(viewDistance, type, x, y, z, rotX, rotY, rotZ, diameter, scaleZ, r, g, b, a, blobUpAndDown, rotate)
     local playerPed = PlayerPedId()
     local pos = GetEntityCoords(playerPed)
@@ -83,6 +136,15 @@ function SC.Functions:DrawMarker(viewDistance, type, x, y, z, rotX, rotY, rotZ, 
     return false, false
 end
 
+--- Draw the servers default marker
+--- @deprecated
+--- @param x number
+--- @param y number
+--- @param z number
+--- @param diameter number
+--- @return boolean draw
+--- @return boolean interact
+--- @author Java3east
 function SC.Functions:DrawDefaultMarker(x, y, z, diameter)
     local playerPed = PlayerPedId()
     local defaultMarker = Config.server.marker
@@ -96,6 +158,16 @@ function SC.Functions:DrawDefaultMarker(x, y, z, diameter)
     return false, false
 end
 
+--- Draw the servers default marker with good performance.
+--- @param x number
+--- @param y number
+--- @param z number
+--- @param diameter number
+--- @param time integer
+--- @param key integer
+--- @param infoTextId string
+--- @param callback function triggered on interaction
+--- @author Java3east
 function SC.Functions:AsyncDrawDefaultMarker(x, y, z, diameter, time, key, infoTextId, callback)
     local playerPed = PlayerPedId()
     local defaultMarker = Config.server.marker
@@ -130,6 +202,9 @@ function SC.Functions:AsyncDrawDefaultMarker(x, y, z, diameter, time, key, infoT
     end
 end
 
+--- Spawn a vehilce
+--- @return action action
+--- @author Java3east
 function SC.Functions:SpawnVehicle()
     return Action:new(function(cb, model, x, y, z, w)
         local hashModel = GetHashKey(model)
@@ -141,18 +216,33 @@ function SC.Functions:SpawnVehicle()
     end)
 end
 
+--- Check if the player has loaded
+--- @return boolean
+--- @author Java3east
 function SC.Functions:IsPlayerLoaded()
     return self:Run("IsPlayerLoaded")
 end
 
+--- Get the players job
+--- @return table job
+--- @author Java3east
 function SC.Functions:GetJob()
     return self:Run("GetJob")
 end
 
+--- Display a notification
+--- @param text string
+--- @author Java3east
 function SC.Functions:Notify(text)
     self:Run("Notify", text)
 end
 
+--- Show a help notification
+--- @param text string
+--- @param loop boolean
+--- @param sound boolean
+--- @param duration integer
+--- @author Java3east
 function SC.Functions:ShowHelpNotification(text, loop, sound, duration)
     loop = loop or false
     sound = sound or false
@@ -162,6 +252,9 @@ function SC.Functions:ShowHelpNotification(text, loop, sound, duration)
     EndTextCommandDisplayHelp(0, loop, sound, duration)
 end
 
+--- Wait for the player to load
+--- @return action action
+--- @author Java3east
 function SC.Functions:AwaitPlayerLoaded()
     return Action:new(function(cb)
         if SC.Functions:IsPlayerLoaded() then
@@ -174,6 +267,18 @@ function SC.Functions:AwaitPlayerLoaded()
     end)
 end
 
+--- Check if the player is relative located to an object / entity
+--- @param object integer
+--- @param direction vector3
+--- @param distance number
+--- @param diameter number
+--- @param time integer
+--- @param key integer
+--- @param infoTextId string
+--- @param callback function
+--- @param drawMarker boolean
+--- @param checkDistance number
+--- @author Java3east
 function SC.Functions:AsyncCheckIsPlayerRelativeLocated(object, direction, distance, diameter, time, key, infoTextId, callback, drawMarker, checkDistance)
     local coords = GetOffsetFromEntityInWorldCoords(object, direction.x * distance, direction.y * distance, direction.z * distance)
     local player = PlayerPedId()
