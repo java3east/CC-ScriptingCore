@@ -1,0 +1,142 @@
+{
+	"Scripting Core": {
+		"prefix": "SC",
+		"body": "SC = exports.jb_scriptingCore:GetCore()",
+		"description": "Load the scripting Core object."
+	},
+	"SC:Debug": {
+		"prefix": ["Debug", "SC:Debug"],
+		"body": "SC:Debug(${1:\"\"})",
+		"description": "Debug a message to the console."
+	},
+	"SC:GetFramework": {
+		"prefix": ["GetFramework", "SC:GetFramework"],
+		"body": "SC:GetFramework()",
+		"description": "Get the selected scripting core framework."
+	},
+	"SC:GetResourceName": {
+		"prefix": ["GetResourceName", "SC:GetResourceName"],
+		"body": "SC:GetResourceName()",
+		"description": "Get the name selected scripting core resource."
+	},
+	"SC:AwaitEvent": {
+		"prefix": ["AwaitEvent", "SC:AwaitEvent"],
+		"body": "SC:AwaitEvent(${1\"\"})",
+		"description": "Wait for an event to be triggered and return the result."
+	},
+	"SC:GetCoreObject": {
+		"prefix": ["GetCoreObject", "SC:GetCoreObject"],
+		"body": "SC:GetCoreObject()",
+		"description": "Get the frameworks core object."
+	},
+	"SC:GetDefaultColors": {
+		"prefix": ["GetDefaultColors", "SC:GetDefaultColors"],
+		"body": "SC:GetDefaultColors()",
+		"description": "Get the servers default colors."
+	},
+
+
+
+	"SC:ServerCallback (CLIENT)": {
+		"prefix": ["ServerCallback", "SC:ServerCallback"],
+		"body": "SC:ServerCallback(${1:name}, ${2|...,args|}):${3|Sync(),Async(function() end)|}",
+		"description": "Trigger a ServerCallback."
+	},
+	"SC:GetDefaultMarker (CLIENT)": {
+		"prefix": ["GetDefaultMarker", "SC:GetDefaultMarker"],
+		"body": "SC:GetDefaultMarker()",
+		"description": "Get the servers default marker (`{color, alpha, viewDistance}`)."
+	},
+	"SC:DrawDefaultMarker (CLIENT)": {
+		"prefix": ["DrawDefaultMarker", "SC:DrawDefaultMarker"],
+		"body": "SC:DrawDefaultMarker(${1:x}, ${2:y}, ${3:z}, ${4|diameter, 1.0|})",
+		"description": "Draw the servers default marker, returns boolean, boolean, first indecating weather the marker is in drawing range, second indecating that the player is in interaction range."
+	},
+	"SC:DrawMarker (CLIENT)": {
+		"prefix": ["DrawMarker", "SC:DrawMarker"],
+		"body": "SC:DrawMarker(${1|distance, 25.0|}, ${2|type, 1|}, ${3:x}, ${4:y}, ${5:z}, ${6|rotX, 0.0|}, ${7|rotY, 0.0|}, ${8|rotZ, 0.0|}, ${9|diameter, 1.0|}, ${10|scaleZ, 1.0|}, ${11:r}, ${12:g}, ${13:b}, ${14|a, 90|}, ${15|blobUpAndDown, false|}, ${16|rotate, false|})",
+		"description": "Draw a marker, returns boolean, boolean, first indecating weather the marker is in drawing range, second indecating that the player is in interaction range."
+	},
+	"SC:IsPlayerLoaded (CLIENT)": {
+		"prefix": ["IsPlayerLoaded", "SC:IsPlayerLoaded"],
+		"body": "SC:IsPlayerLoaded():${1|Sync(),Async(function()end)|}",
+		"description": "Returns true if this players character has been loaded."
+	},
+	"SC:GetJob (CLIENT)": {
+		"prefix": ["GetJob", "SC:GetJob"],
+		"body": "SC:GetJob()",
+		"description": "Returns the players job table (`{name,label,grade,grade_name,grade_label,salary}`)."
+	},
+	"SC:Notify (CLIENT)": {
+		"prefix": ["Notify", "SC:Notify"],
+		"body": "SC:Notify(${1:\"\"})",
+		"description": "Send a notification to the player."
+	},
+	"SC:ShowHelpNotification (CLIENT)": {
+		"prefix": ["ShowHelpNotification", "SC:ShowHelpNotification"],
+		"body": "SC:ShowHelpNotification(text${1|text, \"\"|}, ${2|isLooped, false|}, ${3|makeSound, true|}, ${4|duration, 100|})",
+		"description": "Show a help notification to the player."
+	},
+	"SC:AsyncDrawDefaultMarker (CLIENT)": {
+		"prefix": ["AsyncDrawDefaultMarker", "SC:AsyncDrawDefaultMarker"],
+		"body": "SC:AsyncDrawDefaultMarker(${1:x}, ${2:y}, ${3:z}, ${4|diameter, 1.0|}, ${5|time, 850|}, ${6|key, 51|}, ${7|infoTextId, \"my_textentry_name\"|}, ${8|callback, function() end|})",
+		"description": "Keep drawing the default marker at a given location for a given time (better performance than DrawDefaultMarker)."
+	},
+	"SC:SpawnVehicle (CLIENT)": {
+		"prefix": ["SpawnVehicle", "SC:SpawnVehicle"],
+		"body": "SC:SpawnVehicle():${1|Sync(model\\, x\\, y\\, z\\, w),Async(function(vehicle)end\\, model\\, x\\, y\\, z\\, w)|}",
+		"description": "Spawn a vehicle at a given location."
+	},
+	"SC:AwaitPlayerLoaded (CLIENT)": {
+		"prefix": ["AwaitPlayerLoaded", "SC:AwaitPlayerLoaded"],
+		"body": "SC:AwaitPlayerLoaded()",
+		"description": "Wait for the player to be loaded."
+	},
+	"SC:AsyncCheckIsPlayerRelativeLocated (CLIENT)": {
+		"prefix": ["AsyncCheckIsPlayerRelativeLocated", "SC:AsyncCheckIsPlayerrelativeLocated"],
+		"body": "SC:AsyncCheckIsPlayerRelativeLocated(${1:object}, ${2|direction, vector3(0.0\\, 1.0\\, 0.0)|}, ${3|distance, 1.0|}, ${4|diameter, 1.0|}, ${5|time, 750|}, ${6|key, 51|}, ${7|infoTextId, \"my_textentry_name\"|}, ${8|callback, function() end|}, ${9|drawMarker, true|}, ${10|checkDistance, 25.0|})",
+		"description": "E.g. check if the player is standing behind a vehicle."
+	},
+	
+
+
+
+	"SC:RegisterServerCallback (SERVER)": {
+		"prefix": ["RegisterServerCallback", "SC:RegisterServerCallback"],
+		"body": "SC:RegisterServerCallback(${1:name}, ${2|callback, function(source\\, cb\\, args) end|})",
+		"description": "Regiser a new ServerCallback."
+	},
+	"SC:GetJob (SERVER)": {
+		"prefix": ["GetJob", "SC:GetJob"],
+		"body": "SC:GetJob(${1:source})",
+		"description": "Get the players job table `{name='job_name',label='Job Label',grade=0,grade_name='Grade Name'}`."
+	},
+	"SC:ToAllOnlinePlayers (SERVER)": {
+		"prefix": ["ToAllOnlinePlayers", "SC:ToAllOnlinePlayers"],
+		"body": "SC:ToAllOnlinePlayers(${1:event}, ${2|args, ...|})",
+		"description": "Send an event to all currently online players."
+	},
+	"SC:GetPlayers (SERVER)": {
+		"prefix": ["GetPlayers", "SC:GetPlayers"],
+		"body": "SC:GetPlayers()",
+		"description": "Get a list of the ids of all online players `[1, 4, 5, 6, 7, 10]`."
+	},
+	"SC:AddAccountMoney (SERVER)": {
+		"prefix": ["AddAccountMoney", "SC:AddAccountMoney"],
+		"body": "SC:AddAccountMoney(${1:source}, ${2|\"money\", \"bank\", \"black\", account|}, ${3:amount})",
+		"description": "Add money to a given account of a given player."
+	},
+
+
+
+
+	"jb_scriptingCore:CLIENT:playerLoaded (EVENT) (CLIENT)": {
+		"prefix": ["playerLoaded", "event:playerLoaded"],
+		"body": [
+			"RegisterNetEvent('jb_scriptingCore:CLIENT:playerLoaded', function()",
+			"	${1}",
+			"end)"
+		],
+		"description": "Triggered when the player has loaded."
+	}
+}
