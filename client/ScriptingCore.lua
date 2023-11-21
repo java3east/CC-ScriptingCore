@@ -61,7 +61,7 @@ end
 --- Trigger a server callback
 --- @param name string
 --- @param ... any
---- @return action action
+--- @return Action action
 --- @author Java3east
 function SC.Functions:ServerCallback(name, ...)
     local args = table.pack(... or {})
@@ -203,7 +203,7 @@ function SC.Functions:AsyncDrawDefaultMarker(x, y, z, diameter, time, key, infoT
 end
 
 --- Spawn a vehilce
---- @return action action
+--- @return Action action
 --- @author Java3east
 function SC.Functions:SpawnVehicle()
     return Action:new(function(cb, model, x, y, z, w)
@@ -253,7 +253,7 @@ function SC.Functions:ShowHelpNotification(text, loop, sound, duration)
 end
 
 --- Wait for the player to load
---- @return action action
+--- @return Action action
 --- @author Java3east
 function SC.Functions:AwaitPlayerLoaded()
     return Action:new(function(cb)
@@ -269,7 +269,7 @@ end
 
 --- Check if the player is relative located to an object / entity
 --- @param object integer
---- @param direction vector3
+--- @param direction vector3|table
 --- @param distance number
 --- @param diameter number
 --- @param time integer

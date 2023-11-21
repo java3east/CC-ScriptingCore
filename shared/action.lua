@@ -4,7 +4,7 @@ Action.__index = Action
 
 --- Create a new action
 --- @param fkt function
---- @return action action
+--- @return Action action
 --- @author Java3east
 function Action:new(fkt)
     local object = {}
