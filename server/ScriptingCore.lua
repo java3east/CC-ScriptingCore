@@ -133,7 +133,7 @@ end
 --- Add money to a players account
 --- @param source integer
 --- @param account string
---- @param amount interger
+--- @param amount integer
 --- @author Java3east
 function SC.Functions:AddAccountMoney(source, account, amount)
     self:Run("AddAccountMoney", source, account, amount)

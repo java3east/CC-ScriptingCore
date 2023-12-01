@@ -269,7 +269,7 @@ end
 
 --- Check if the player is relative located to an object / entity
 --- @param object integer
---- @param direction vector3
+--- @param direction vector3|table
 --- @param distance number
 --- @param diameter number
 --- @param time integer

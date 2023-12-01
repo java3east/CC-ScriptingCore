@@ -138,5 +138,57 @@
 			"end)"
 		],
 		"description": "Triggered when the player has loaded."
+	},
+
+
+
+	"AnimationManager:New (CLIENT)": {
+		"prefix": ["AnimationManager", "AnimationManager:New"],
+		"body": [
+			"local animationManager = AnimationManager:New()"
+		],
+		"description": "Create a new AnimationManager."
+	},
+	"AnimationManager:RegisterState": {
+		"prefix": ["RegisterState", "animationManager:RegisterState"],
+		"body": [
+			"animationManager:RegisterState(${1:name}, ${2:animation})"
+		],
+		"description": "Register a new AnimationState."
+	},
+	"AnimationManager:SetState": {
+		"prefix": ["SetState", "animationManager:SetState"],
+		"body": [
+			"animationManager:SetState(${1:state})"
+		],
+		"description": "Instantly change the current state of animation."
+	},
+	"AnimationManager:Transit": {
+		"prefix": ["Transit", "animationManager:Transit"],
+		"body": [
+			"animationManager:Transit(${1:state})"
+		],
+		"description": "Play a transitional animation from the current state to the next."
+	},
+	"Animation:New": {
+		"prefix": ["Animation", "Animation:New"],
+		"body": [
+			"local animation = Animation:New(${1|name,\"anim@heists@prison_heistig_2_p1_exit_bus exit_bus_player_guard\"|}, ${2|time,1000|}, ${3|infinite,true,false|})"
+		],
+		"description": "Create a new Aniation"
+	},
+	"Animation:Play": {
+		"prefix": ["Play", "animation:Play"],
+		"body": [
+			"animation:Play()"
+		],
+		"description": "play this animation."
+	},
+	"Animation:Stop": {
+		"prefix": ["Stop", "animation:Stop()"],
+		"body": [
+			"animation:Stop()"
+		],
+		"description": "stop playing this animation."
 	}
 }
