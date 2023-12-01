@@ -6,7 +6,7 @@ AnimationManager = {animations = {}, transitions = {}, states = {}, state = nil}
 --- @return AnimationManager
 function AnimationManager:New(animations, transitions)
     local manager = {}
-    manager.animations = animations or slef.animations
+    manager.animations = animations or self.animations
     manager.transitions = transitions or self.transitions
     manager.RegisterState = self.RegisterState
     manager.RegisterTransition = self.RegisterTransition
