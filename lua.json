@@ -89,7 +89,7 @@
 	},
 	"SC:AwaitPlayerLoaded (CLIENT)": {
 		"prefix": ["AwaitPlayerLoaded", "SC:AwaitPlayerLoaded"],
-		"body": "SC:AwaitPlayerLoaded()",
+		"body": "SC:AwaitPlayerLoaded():${1|Sync(),Async(function()end)|}",
 		"description": "Wait for the player to be loaded."
 	},
 	"SC:AsyncCheckIsPlayerRelativeLocated (CLIENT)": {
@@ -190,5 +190,33 @@
 			"animation:Stop()"
 		],
 		"description": "stop playing this animation."
+	},
+
+
+	"PartyManager": {
+		"prefix": ["PartyManager"],
+		"body": "local pm = exports['cc_scriptingCore']:GetPartyManager()",
+		"description": "get the party manager."
+	},
+	"PartyManager:CreateParty (SERVER)": {
+		"prefix": ["pm:CreateParty", "CreateParty"],
+		"body": [
+			"local party = pm:CreateParty(${1:source})"
+		],
+		"description": "create a new party."
+	},
+	"PartyManager:GetParty (SERVER)": {
+		"prefix": ["pm:GetParty", "GetParty"],
+		"body": [
+			"local party = pm:GetParty(${1:id})"
+		],
+		"description": "get a party by its id."
+	},
+	"PartyManager:GetPartyOfPlayer (SERVER)": {
+		"prefix": ["pm:GetPartyOfPlayer", "GetPartyOfPlayer"],
+		"body": [
+			"local party = pm:GetPartyOfPlayer(${1:source})"
+		],
+		"description": "get the party a player is in."
 	}
 }
