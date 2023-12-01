@@ -314,6 +314,33 @@ function SC.Functions:AsyncCheckIsPlayerRelativeLocated(object, direction, dista
     end
 end
 
+--- Get the player name
+--- @return nil|table name `{firstname[string], lastname[string]}`
+--- @author Java3east
+function SC.Functions:GetName()
+    if self:IsPlayerLoaded() then
+        return self:Run("GetName")
+    else
+        return nil
+    end
+end
+
+--- Get the players signature
+--- @return nil|string signature format: (1st char of firstname).lastname
+--- @author Java3east
+function SC.Functions:GetSignature()
+    if self:IsPlayerLoaded() then
+        local name = self:GetName()
+        if name == nil then
+            return nil
+        else
+            return name.firstname:sub(1, 1) .. "." .. name.lastname
+        end
+    else
+        return nil
+    end
+end
+
 exports("GetCore", function(advanced)
     local promise = Promise:new()
     CreateThread(function()
